@@ -30,6 +30,10 @@ CREATE INDEX IF NOT EXISTS idx_products_published ON products(published);
 
 DROP POLICY IF EXISTS "anon_select_products" ON products;
 
+-- Agregamos estas dos líneas para que sea idempotente
+DROP POLICY IF EXISTS "anon_select_published_products" ON products;
+DROP POLICY IF EXISTS "authenticated_select_products" ON products;
+
 CREATE POLICY "anon_select_published_products" ON products FOR SELECT
 TO anon USING (published = true);
 
