@@ -17,6 +17,10 @@ DROP POLICY IF EXISTS "anon_insert_categories" ON categories;
 DROP POLICY IF EXISTS "anon_update_categories" ON categories;
 DROP POLICY IF EXISTS "anon_delete_categories" ON categories;
 
+DROP POLICY IF EXISTS "authenticated_insert_categories" ON categories;
+DROP POLICY IF EXISTS "authenticated_update_categories" ON categories;
+DROP POLICY IF EXISTS "authenticated_delete_categories" ON categories;
+
 CREATE POLICY "authenticated_insert_categories" ON categories FOR INSERT
 TO authenticated WITH CHECK (true);
 
@@ -30,6 +34,10 @@ TO authenticated USING (true);
 DROP POLICY IF EXISTS "anon_insert_products" ON products;
 DROP POLICY IF EXISTS "anon_update_products" ON products;
 DROP POLICY IF EXISTS "anon_delete_products" ON products;
+
+DROP POLICY IF EXISTS "authenticated_insert_products" ON products;
+DROP POLICY IF EXISTS "authenticated_update_products" ON products;
+DROP POLICY IF EXISTS "authenticated_delete_products" ON products;
 
 CREATE POLICY "authenticated_insert_products" ON products FOR INSERT
 TO authenticated WITH CHECK (true);
