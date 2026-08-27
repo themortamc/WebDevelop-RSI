@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { useProducts } from '@/lib/hooks';
-import { Star, ShoppingCart, X, Package } from 'lucide-react';
 import type { Product } from '@/lib/supabase';
 import ProductCard from './ProductCard';
 

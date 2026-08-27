@@ -23,7 +23,6 @@ export default function App() {
   const [toast, setToast] = useState<string | null>(null);
 
   const catalogRef = useRef<HTMLDivElement>(null);
-  const categoriesRef = useRef<HTMLDivElement>(null);
 
   const scrollToSection = useCallback((section: string) => {
     const element = document.getElementById(section);
