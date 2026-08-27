@@ -50,10 +50,10 @@ export default function Header({ cartCount, onCartClick, onNavigate, onSearch, s
               Escribinos por WhatsApp
             </a>
             <span className="text-slate-500">|</span>
-            <span>Envíos a todo el país</span>
+            <span>Repuestos originales y de calidad</span>
           </div>
           <div className="flex items-center gap-4">
-            <span>Repuestos originales y de calidad</span>
+            <span>Más de 25 años de experiencia</span>
             <span className="text-slate-500">|</span>
             <span>Garantía en todos nuestros productos</span>
           </div>

@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { X, Star, ShoppingCart, Check, Minus, Plus, Package } from 'lucide-react';
+import { X, Star, ShoppingCart, Check, Minus, Plus } from 'lucide-react';
 import type { Product } from '@/lib/supabase';
 import { formatPrice } from '@/lib/hooks';
+import ProductImageFallback from './ProductImageFallback';
 
 type QuickViewModalProps = {
   product: Product | null;
@@ -54,9 +55,7 @@ export default function QuickViewModal({ product, onClose, onAddToCart }: QuickV
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-slate-300">
-                  <Package className="w-16 h-16" />
-                </div>
+                <ProductImageFallback product={product} iconClassName="w-16 h-16" />
               )}
               {product.featured && (
                 <span className="absolute top-3 left-3 px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-md uppercase tracking-wide">

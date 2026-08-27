@@ -1,4 +1,4 @@
-import { ShieldCheck, Truck, Clock, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Wrench, Clock, ArrowRight } from 'lucide-react';
 
 type HeroProps = {
   onShopNow: () => void;
@@ -32,7 +32,7 @@ export default function Hero({ onShopNow, onViewCategories }: HeroProps) {
 
           <p className="text-lg text-slate-300 mb-8 max-w-xl leading-relaxed animate-[fadeIn_0.8s_ease-out]">
             Encuentra las mejores marcas en repuestos y accesorios automotrices.
-            Calidad garantizada, asesoría experta y envíos a todo el país.
+            Calidad garantizada y asesoría experta.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 mb-12 animate-[fadeIn_0.9s_ease-out]">
@@ -55,10 +55,10 @@ export default function Hero({ onShopNow, onViewCategories }: HeroProps) {
           <div className="grid grid-cols-3 gap-4 max-w-lg animate-[fadeIn_1s_ease-out]">
             <div className="text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-                <Truck className="w-5 h-5 text-red-400" />
-                <span className="text-white font-bold text-lg">24h</span>
+                <Wrench className="w-5 h-5 text-red-400" />
+                <span className="text-white font-bold text-lg">5,000+</span>
               </div>
-              <p className="text-xs text-slate-400">Envío express</p>
+              <p className="text-xs text-slate-400">Clientes satisfechos</p>
             </div>
             <div className="text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">

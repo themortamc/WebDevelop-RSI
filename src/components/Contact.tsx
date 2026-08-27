@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { MapPin, MessageCircle, Mail, Clock, Send, CheckCircle2 } from 'lucide-react';
+import { MapPin, MessageCircle, Clock, Send, CheckCircle2 } from 'lucide-react';
 import { WHATSAPP_NUMBER } from '@/lib/config';
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
+  const [form, setForm] = useState({ name: '', phone: '', message: '' });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ export default function Contact() {
     {
       icon: MapPin,
       title: 'Dirección',
-      lines: ['San Isidro 1388', 'Argentina, Mendoza, Rivadavia'],
+      lines: ['Argentina, Mendoza, Rivadavia', 'Calle San Isidro N.º 1388'],
     },
     {
       icon: MessageCircle,
@@ -118,22 +118,9 @@ export default function Contact() {
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
                         className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
-                        placeholder="+51 ..."
+                        placeholder="+54 9 ..."
                       />
                     </div>
-                  </div>
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
-                      placeholder="tucorreo@email.com"
-                    />
                   </div>
                   <div className="mb-6">
                     <label className="block text-sm font-medium text-slate-700 mb-1.5">

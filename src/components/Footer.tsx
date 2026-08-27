@@ -1,4 +1,4 @@
-import { Wrench, MapPin, MessageCircle, Mail, Facebook, Instagram, Youtube } from 'lucide-react';
+import { Wrench, MapPin, MessageCircle } from 'lucide-react';
 import { WHATSAPP_NUMBER } from '@/lib/config';
 
 type FooterProps = {
@@ -39,17 +39,6 @@ export default function Footer({ onNavigate }: FooterProps) {
               Tu tienda de confianza en repuestos automotrices. Más de 25 años brindando
               calidad y servicio experto.
             </p>
-            <div className="flex items-center gap-3">
-              {[Facebook, Instagram, Youtube].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-red-600 flex items-center justify-center text-slate-400 hover:text-white transition-colors"
-                >
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Quick links */}
@@ -98,7 +87,7 @@ export default function Footer({ onNavigate }: FooterProps) {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">Av. San Isidro 1234, Lima, Perú</span>
+                <span className="text-sm">Argentina, Mendoza, Rivadavia — Calle San Isidro N.º 1388</span>
               </li>
               <li className="flex items-start gap-3">
                 <MessageCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
@@ -110,10 +99,6 @@ export default function Footer({ onNavigate }: FooterProps) {
                 >
                   WhatsApp
                 </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">ventas@repuestossanisidro.com</span>
               </li>
             </ul>
           </div>

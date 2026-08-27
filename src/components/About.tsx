@@ -1,10 +1,10 @@
-import { Wrench, ShieldCheck, Truck, Headphones, Award, Users, Building2, CheckCircle2 } from 'lucide-react';
+import { Wrench, ShieldCheck, MapPin, Headphones, Award, Users, Building2, CheckCircle2 } from 'lucide-react';
 
 export default function About() {
   const stats = [
     { icon: Users, value: '5,000+', label: 'Clientes satisfechos' },
     { icon: Award, value: '25+', label: 'Años de experiencia' },
-    { icon: Truck, value: '24h', label: 'Envío express' },
+    { icon: Wrench, value: '4,000+', label: 'Repuestos en catálogo' },
     { icon: ShieldCheck, value: '100%', label: 'Garantía real' },
   ];
 
@@ -15,9 +15,9 @@ export default function About() {
       description: 'Todos nuestros repuestos cuentan con garantía y son de marcas reconocidas mundialmente.',
     },
     {
-      icon: Truck,
-      title: 'Envío a Todo el País',
-      description: 'Despachamos a cualquier ciudad con entrega en 24 a 48 horas hábiles.',
+      icon: MapPin,
+      title: 'Retiro en Local',
+      description: 'Encontrá tu repuesto y retiralo en nuestro local en Rivadavia, Mendoza.',
     },
     {
       icon: Headphones,

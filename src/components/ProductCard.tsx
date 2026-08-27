@@ -1,6 +1,7 @@
-import { Star, ShoppingCart, Package } from 'lucide-react';
+import { Star, ShoppingCart } from 'lucide-react';
 import type { Product } from '@/lib/supabase';
 import { formatPrice } from '@/lib/hooks';
+import ProductImageFallback from './ProductImageFallback';
 
 type ProductCardProps = {
   product: Product;
@@ -27,9 +28,7 @@ export default function ProductCard({ product, onAddToCart, onQuickView }: Produ
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-slate-300">
-            <Package className="w-12 h-12" />
-          </div>
+          <ProductImageFallback product={product} />
         )}
 
         {/* Badges */}
