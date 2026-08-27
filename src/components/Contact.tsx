@@ -8,6 +8,11 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const texto = `Hola! Soy ${form.name} (${form.phone}).\n\n${form.message}`;
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -89,8 +94,8 @@ export default function Contact() {
                   <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
                     <CheckCircle2 className="w-8 h-8 text-green-600" />
                   </div>
-                  <h3 className="font-bold text-xl text-slate-900 mb-2">¡Mensaje enviado!</h3>
-                  <p className="text-slate-500">Te contactaremos lo antes posible.</p>
+                  <h3 className="font-bold text-xl text-slate-900 mb-2">¡Listo!</h3>
+                  <p className="text-slate-500">Te llevamos a WhatsApp para que envíes tu mensaje.</p>
                 </div>
               ) : (
                 <>
