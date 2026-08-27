@@ -11,7 +11,7 @@ export default function Contact() {
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
-      setForm({ name: '', email: '', phone: '', message: '' });
+      setForm({ name: '', phone: '', message: '' });
     }, 3000);
   };
 
@@ -19,18 +19,13 @@ export default function Contact() {
     {
       icon: MapPin,
       title: 'Dirección',
-      lines: ['Av. San Isidro 1234', 'Lima, Perú'],
+      lines: ['San Isidro 1388', 'Argentina, Mendoza, Rivadavia'],
     },
     {
       icon: MessageCircle,
       title: 'WhatsApp',
-      lines: ['Respondemos por WhatsApp'],
+      lines: ['Respondemos solo mesajes por WhatsApp'],
       href: `https://wa.me/${WHATSAPP_NUMBER}`,
-    },
-    {
-      icon: Mail,
-      title: 'Email',
-      lines: ['ventas@repuestossanisidro.com', 'info@repuestossanisidro.com'],
     },
     {
       icon: Clock,
