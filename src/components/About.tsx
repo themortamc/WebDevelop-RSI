@@ -37,7 +37,7 @@ export default function About() {
         {/* Story */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
           <div>
-            <span className="text-sm font-semibold text-red-600 uppercase tracking-wider">
+            <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
               Nosotros
             </span>
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mt-2 mb-6">
@@ -79,7 +79,7 @@ export default function About() {
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-5 hidden sm:block">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center">
                   <Building2 className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -88,7 +88,7 @@ export default function About() {
                 </div>
               </div>
             </div>
-            <div className="absolute -top-4 -right-4 bg-red-600 text-white rounded-2xl shadow-xl p-4 hidden sm:block">
+            <div className="absolute -top-4 -right-4 bg-blue-600 text-white rounded-2xl shadow-xl p-4 hidden sm:block">
               <div className="flex items-center gap-2">
                 <Wrench className="w-5 h-5" />
                 <span className="font-bold text-sm">Desde 1999</span>
@@ -104,8 +104,8 @@ export default function About() {
               key={stat.label}
               className="bg-white rounded-2xl p-6 text-center border border-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-shadow"
             >
-              <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center mx-auto mb-3">
-                <stat.icon className="w-6 h-6 text-red-600" />
+              <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mx-auto mb-3">
+                <stat.icon className="w-6 h-6 text-blue-600" />
               </div>
               <div className="text-3xl font-bold text-slate-900 mb-1">{stat.value}</div>
               <div className="text-sm text-slate-500">{stat.label}</div>
@@ -118,7 +118,7 @@ export default function About() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="bg-white rounded-2xl p-6 border border-slate-100 hover:border-red-200 hover:shadow-lg hover:shadow-slate-200/40 transition-all"
+              className="bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-200 hover:shadow-lg hover:shadow-slate-200/40 transition-all"
             >
               <div className="w-11 h-11 rounded-xl bg-slate-900 flex items-center justify-center mb-4">
                 <feature.icon className="w-5 h-5 text-white" />

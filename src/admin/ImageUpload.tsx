@@ -53,7 +53,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
           <button
             type="button"
             onClick={() => onChange(null)}
-            className="absolute top-2 right-2 w-8 h-8 bg-white/90 hover:bg-white rounded-lg flex items-center justify-center text-slate-700 hover:text-red-600 shadow-sm transition-colors"
+            className="absolute top-2 right-2 w-8 h-8 bg-white/90 hover:bg-white rounded-lg flex items-center justify-center text-slate-700 hover:text-blue-600 shadow-sm transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -63,7 +63,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={uploading}
-          className="w-full h-40 rounded-xl border-2 border-dashed border-slate-300 hover:border-red-400 hover:bg-red-50/30 flex flex-col items-center justify-center gap-2 text-slate-400 hover:text-red-500 transition-colors"
+          className="w-full h-40 rounded-xl border-2 border-dashed border-slate-300 hover:border-blue-400 hover:bg-blue-50/30 flex flex-col items-center justify-center gap-2 text-slate-400 hover:text-blue-500 transition-colors"
         >
           {uploading ? (
             <>
@@ -91,7 +91,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
         }}
       />
 
-      {error && <p className="text-xs text-red-600 mt-1.5">{error}</p>}
+      {error && <p className="text-xs text-blue-600 mt-1.5">{error}</p>}
     </div>
   );
 }

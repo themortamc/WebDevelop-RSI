@@ -23,7 +23,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center">
+              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center">
                 <Wrench className="w-5 h-5 text-white" strokeWidth={2.5} />
               </div>
               <div>
@@ -51,7 +51,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 <li key={link.section}>
                   <button
                     onClick={() => onNavigate(link.section)}
-                    className="text-sm hover:text-red-400 transition-colors"
+                    className="text-sm hover:text-blue-400 transition-colors"
                   >
                     {link.label}
                   </button>
@@ -70,7 +70,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 <li key={cat}>
                   <button
                     onClick={() => onNavigate('catalogo')}
-                    className="text-sm hover:text-red-400 transition-colors"
+                    className="text-sm hover:text-blue-400 transition-colors"
                   >
                     {cat}
                   </button>
@@ -86,16 +86,16 @@ export default function Footer({ onNavigate }: FooterProps) {
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
                 <span className="text-sm">Argentina, Mendoza, Rivadavia — Calle San Isidro N.º 1388</span>
               </li>
               <li className="flex items-start gap-3">
-                <MessageCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                <MessageCircle className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
                 <a
                   href={`https://wa.me/${WHATSAPP_NUMBER}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm hover:text-red-400 transition-colors"
+                  className="text-sm hover:text-blue-400 transition-colors"
                 >
                   WhatsApp
                 </a>

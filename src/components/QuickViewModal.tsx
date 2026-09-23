@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { X, Star, ShoppingCart, Check, Minus, Plus } from 'lucide-react';
 import type { Product } from '@/lib/supabase';
-import { formatPrice } from '@/lib/hooks';
 import ProductImageFallback from './ProductImageFallback';
 
 type QuickViewModalProps = {
@@ -58,7 +57,7 @@ export default function QuickViewModal({ product, onClose, onAddToCart }: QuickV
                 <ProductImageFallback product={product} iconClassName="w-16 h-16" />
               )}
               {product.featured && (
-                <span className="absolute top-3 left-3 px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-md uppercase tracking-wide">
+                <span className="absolute top-3 left-3 px-3 py-1 bg-blue-600 text-white text-xs font-bold rounded-md uppercase tracking-wide">
                   Destacado
                 </span>
               )}
@@ -67,7 +66,7 @@ export default function QuickViewModal({ product, onClose, onAddToCart }: QuickV
             {/* Info */}
             <div className="flex flex-col">
               <div className="flex items-center gap-3 mb-2">
-                <span className="text-sm font-semibold text-red-600 uppercase tracking-wide">
+                <span className="text-sm font-semibold text-blue-600 uppercase tracking-wide">
                   {product.brand}
                 </span>
                 <div className="flex items-center gap-1">
@@ -95,7 +94,7 @@ export default function QuickViewModal({ product, onClose, onAddToCart }: QuickV
                   </div>
                   <div
                     className={`text-sm font-semibold mt-0.5 ${
-                      inStock ? 'text-green-600' : 'text-red-600'
+                      inStock ? 'text-green-600' : 'text-blue-600'
                     }`}
                   >
                     {inStock ? `${product.stock} unidades` : 'Agotado'}
@@ -104,40 +103,30 @@ export default function QuickViewModal({ product, onClose, onAddToCart }: QuickV
               </div>
 
               <div className="mt-auto">
-                <div className="flex items-baseline gap-2 mb-4">
-                  <span className="text-3xl font-bold text-slate-900">
-                    {formatPrice(product.price)}
-                  </span>
-                  <span className="text-sm text-slate-400">por unidad</span>
-                </div>
-
                 {inStock && (
                   <div className="flex items-center gap-4 mb-4">
                     <div className="flex items-center gap-1 border border-slate-200 rounded-xl">
                       <button
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="w-9 h-9 flex items-center justify-center text-slate-600 hover:text-red-600 transition-colors"
+                        className="w-9 h-9 flex items-center justify-center text-slate-600 hover:text-blue-600 transition-colors"
                       >
                         <Minus className="w-4 h-4" />
                       </button>
                       <span className="w-10 text-center font-semibold">{quantity}</span>
                       <button
                         onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                        className="w-9 h-9 flex items-center justify-center text-slate-600 hover:text-red-600 transition-colors"
+                        className="w-9 h-9 flex items-center justify-center text-slate-600 hover:text-blue-600 transition-colors"
                       >
                         <Plus className="w-4 h-4" />
                       </button>
                     </div>
-                    <span className="text-sm text-slate-500">
-                      Subtotal: <span className="font-semibold text-slate-900">{formatPrice(product.price * quantity)}</span>
-                    </span>
                   </div>
                 )}
 
                 <button
                   onClick={handleAdd}
                   disabled={!inStock}
-                  className="w-full py-3.5 bg-slate-900 hover:bg-red-600 text-white font-semibold rounded-xl shadow-lg disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3.5 bg-slate-900 hover:bg-blue-600 text-white font-semibold rounded-xl shadow-lg disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
                 >
                   {added ? (
                     <>

@@ -10,7 +10,7 @@ import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 import QuickViewModal from '@/components/QuickViewModal';
 import Toast from '@/components/Toast';
-import { useCategories, useCart, formatPrice } from '@/lib/hooks';
+import { useCategories, useCart } from '@/lib/hooks';
 import { WHATSAPP_NUMBER } from '@/lib/config';
 import type { Product } from '@/lib/supabase';
 
@@ -41,15 +41,12 @@ export default function App() {
 
   const handleCheckout = useCallback(() => {
     const lines = cart.items.map(
-      (item) =>
-        `• ${item.quantity}x ${item.product.name} - ${formatPrice(item.product.price * item.quantity)}`
+      (item) => `• ${item.quantity}x ${item.product.name} (SKU ${item.product.sku})`
     );
     const message = [
-      '¡Hola! Quiero hacer este pedido:',
+      '¡Hola! Quiero consultar precio y disponibilidad de este pedido:',
       '',
       ...lines,
-      '',
-      `Total: ${formatPrice(cart.total)}`,
     ].join('\n');
 
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
@@ -114,7 +111,6 @@ export default function App() {
         isOpen={cart.isOpen}
         onClose={() => cart.setIsOpen(false)}
         items={cart.items}
-        total={cart.total}
         onUpdateQuantity={cart.updateQuantity}
         onRemove={cart.removeItem}
         onClear={cart.clear}

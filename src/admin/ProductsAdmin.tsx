@@ -35,7 +35,33 @@ export default function ProductsAdmin({ categories }: ProductsAdminProps) {
   const [draftsOnly, setDraftsOnly] = useState(false);
   const [page, setPage] = useState(0);
 
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const [bulkCategoryId, setBulkCategoryId] = useState('');
+
   const filtersActive = Boolean(search.trim() || categoryFilter || draftsOnly);
+
+  // Aplica los mismos filtros de búsqueda/categoría/borradores a cualquier
+  // query (tanto al SELECT paginado de `load` como a los UPDATE masivos de
+  // las acciones en lote), para que "todo lo que coincide con la búsqueda"
+  // sea siempre exactamente lo mismo que se ve en la lista de abajo.
+  const applyFilters = useCallback(
+    <T extends { or: Function; eq: Function }>(query: T): T => {
+      let q: any = query;
+      const term = search.trim();
+      if (term) {
+        const like = `%${term}%`;
+        q = q.or(`name.ilike.${like},brand.ilike.${like},sku.ilike.${like}`);
+      }
+      if (categoryFilter) {
+        q = q.eq('category_id', categoryFilter);
+      }
+      if (draftsOnly) {
+        q = q.eq('published', false);
+      }
+      return q;
+    },
+    [search, categoryFilter, draftsOnly]
+  );
 
   // Debounce del buscador: espera a que el usuario deje de tipear antes
   // de pegarle a la base (si no, con 29mil productos dispara una query
@@ -66,23 +92,13 @@ export default function ProductsAdmin({ categories }: ProductsAdminProps) {
       .order('created_at', { ascending: false })
       .range(from, to);
 
-    const term = search.trim();
-    if (term) {
-      const like = `%${term}%`;
-      query = query.or(`name.ilike.${like},brand.ilike.${like},sku.ilike.${like}`);
-    }
-    if (categoryFilter) {
-      query = query.eq('category_id', categoryFilter);
-    }
-    if (draftsOnly) {
-      query = query.eq('published', false);
-    }
+    query = applyFilters(query);
 
     const { data, count } = await query;
     setProducts(data ?? []);
     setTotalCount(count ?? 0);
     setLoading(false);
-  }, [page, search, categoryFilter, draftsOnly]);
+  }, [page, applyFilters]);
 
   useEffect(() => {
     load();
@@ -112,6 +128,48 @@ export default function ProductsAdmin({ categories }: ProductsAdminProps) {
     setTogglingId(null);
   };
 
+  // Acción masiva: aplica un cambio a TODOS los productos que coinciden
+  // con el filtro activo (no solo a los 50 de la página visible). Si no
+  // hay ningún filtro activo, "todos los que coinciden" es el catálogo
+  // completo — así este mismo botón sirve para publicar/ocultar todo.
+  const runBulkUpdate = useCallback(
+    async (patch: Record<string, unknown>, confirmMsg: string) => {
+      if (!confirm(confirmMsg)) return;
+      setBulkLoading(true);
+      let query = supabase.from('products').update(patch) as any;
+      query = applyFilters(query);
+      const { error } = await query;
+      setBulkLoading(false);
+      if (error) {
+        alert(`No se pudo aplicar el cambio: ${error.message}`);
+        return;
+      }
+      setBulkCategoryId('');
+      load();
+    },
+    [applyFilters, load]
+  );
+
+  const handleBulkPublish = () => {
+    const scope = filtersActive ? `los ${totalCount} productos de este filtro` : `TODO el catálogo (${totalCount} productos)`;
+    runBulkUpdate({ published: true }, `¿Publicar ${scope}?`);
+  };
+
+  const handleBulkHide = () => {
+    const scope = filtersActive ? `los ${totalCount} productos de este filtro` : `TODO el catálogo (${totalCount} productos)`;
+    runBulkUpdate({ published: false }, `¿Ocultar ${scope}?`);
+  };
+
+  const handleBulkCategory = () => {
+    if (!bulkCategoryId) return;
+    const catName = categories.find((c) => c.id === bulkCategoryId)?.name ?? '';
+    const scope = filtersActive ? `los ${totalCount} productos de este filtro` : `TODO el catálogo (${totalCount} productos)`;
+    runBulkUpdate(
+      { category_id: bulkCategoryId },
+      `¿Mover ${scope} a la categoría "${catName}"?`
+    );
+  };
+
   const clearFilters = () => {
     setSearchInput('');
     setSearch('');
@@ -128,7 +186,7 @@ export default function ProductsAdmin({ categories }: ProductsAdminProps) {
         <h2 className="font-bold text-lg text-slate-900">Productos ({totalCount})</h2>
         <button
           onClick={() => setEditing('new')}
-          className="flex items-center gap-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-xl transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition-colors"
         >
           <Plus className="w-4 h-4" />
           Nuevo producto
@@ -143,13 +201,13 @@ export default function ProductsAdmin({ categories }: ProductsAdminProps) {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Buscar por nombre, marca o SKU..."
-            className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
           />
         </div>
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="px-4 py-2.5 border border-slate-200 rounded-xl text-sm font-medium text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all cursor-pointer lg:w-56"
+          className="px-4 py-2.5 border border-slate-200 rounded-xl text-sm font-medium text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all cursor-pointer lg:w-56"
         >
           <option value="">Todas las categorías</option>
           {categories.map((c) => (
@@ -163,20 +221,65 @@ export default function ProductsAdmin({ categories }: ProductsAdminProps) {
             type="checkbox"
             checked={draftsOnly}
             onChange={(e) => setDraftsOnly(e.target.checked)}
-            className="w-4 h-4 rounded border-slate-300 text-red-600 focus:ring-red-500/30"
+            className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500/30"
           />
           Solo borradores
         </label>
         {filtersActive && (
           <button
             onClick={clearFilters}
-            className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-red-600 transition-colors whitespace-nowrap"
+            className="flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors whitespace-nowrap"
           >
             <X className="w-4 h-4" />
             Limpiar filtros
           </button>
         )}
       </div>
+
+      {totalCount > 0 && (
+        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 mb-5 flex flex-col lg:flex-row lg:items-center gap-3">
+          <p className="text-sm text-blue-900 font-medium flex-1">
+            {filtersActive
+              ? `${totalCount} producto(s) coinciden con este filtro`
+              : `${totalCount} producto(s) en el catálogo`}
+          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={handleBulkPublish}
+              disabled={bulkLoading}
+              className="px-4 py-2 bg-white border border-emerald-200 text-emerald-700 text-sm font-semibold rounded-xl hover:bg-emerald-50 disabled:opacity-50 transition-colors"
+            >
+              Publicar {filtersActive ? 'estos' : 'todo'}
+            </button>
+            <button
+              onClick={handleBulkHide}
+              disabled={bulkLoading}
+              className="px-4 py-2 bg-white border border-slate-300 text-slate-600 text-sm font-semibold rounded-xl hover:bg-slate-50 disabled:opacity-50 transition-colors"
+            >
+              Ocultar {filtersActive ? 'estos' : 'todo'}
+            </button>
+            <select
+              value={bulkCategoryId}
+              onChange={(e) => setBulkCategoryId(e.target.value)}
+              className="px-3 py-2 border border-slate-200 rounded-xl text-sm font-medium text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 cursor-pointer"
+            >
+              <option value="">Mover a categoría...</option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={handleBulkCategory}
+              disabled={bulkLoading || !bulkCategoryId}
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl disabled:opacity-50 transition-colors"
+            >
+              Aplicar
+            </button>
+          </div>
+        </div>
+      )}
 
       {loading ? (
         <p className="text-sm text-slate-500">Cargando...</p>
@@ -191,7 +294,7 @@ export default function ProductsAdmin({ categories }: ProductsAdminProps) {
           {filtersActive && (
             <button
               onClick={clearFilters}
-              className="text-sm font-semibold text-red-600 hover:text-red-700"
+              className="text-sm font-semibold text-blue-600 hover:text-blue-700"
             >
               Limpiar filtros
             </button>
@@ -246,7 +349,7 @@ export default function ProductsAdmin({ categories }: ProductsAdminProps) {
                     <button
                       onClick={() => handleDelete(p)}
                       disabled={deletingId === p.id}
-                      className="w-9 h-9 flex items-center justify-center rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors disabled:opacity-50"
+                      className="w-9 h-9 flex items-center justify-center rounded-lg text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-colors disabled:opacity-50"
                       aria-label="Eliminar"
                     >
                       <Trash2 className="w-4 h-4" />

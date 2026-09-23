@@ -24,7 +24,7 @@ export default function FeaturedProducts({ onAddToCart, onQuickView }: FeaturedP
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
-            <span className="text-sm font-semibold text-red-600 uppercase tracking-wider">
+            <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
               Destacados
             </span>
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mt-2">

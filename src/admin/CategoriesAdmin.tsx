@@ -29,7 +29,7 @@ export default function CategoriesAdmin({ categories, onChanged }: CategoriesAdm
         <h2 className="font-bold text-lg text-slate-900">Categorías ({categories.length})</h2>
         <button
           onClick={() => setEditing('new')}
-          className="flex items-center gap-2 px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-xl transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition-colors"
         >
           <Plus className="w-4 h-4" />
           Nueva categoría
@@ -46,8 +46,8 @@ export default function CategoriesAdmin({ categories, onChanged }: CategoriesAdm
           <div className="divide-y divide-slate-100">
             {categories.map((c) => (
               <div key={c.id} className="flex items-center gap-4 p-4 hover:bg-slate-50 transition-colors">
-                <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center flex-shrink-0">
-                  <Tag className="w-4 h-4 text-red-600" />
+                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                  <Tag className="w-4 h-4 text-blue-600" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-semibold text-sm text-slate-900">{c.name}</p>
@@ -65,7 +65,7 @@ export default function CategoriesAdmin({ categories, onChanged }: CategoriesAdm
                   </button>
                   <button
                     onClick={() => handleDelete(c)}
-                    className="w-9 h-9 flex items-center justify-center rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors"
+                    className="w-9 h-9 flex items-center justify-center rounded-lg text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                     aria-label="Eliminar"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -145,7 +145,7 @@ function CategoryForm({
         </div>
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           {error && (
-            <div className="text-sm text-red-600 bg-red-50 px-4 py-3 rounded-xl">{error}</div>
+            <div className="text-sm text-blue-600 bg-blue-50 px-4 py-3 rounded-xl">{error}</div>
           )}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1.5">Nombre</label>
@@ -155,7 +155,7 @@ function CategoryForm({
               autoFocus
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
+              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
               placeholder="Frenos"
             />
           </div>
@@ -167,7 +167,7 @@ function CategoryForm({
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all resize-none"
+              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all resize-none"
             />
           </div>
           <div className="flex gap-3 pt-2">
@@ -181,7 +181,7 @@ function CategoryForm({
             <button
               type="submit"
               disabled={saving}
-              className="flex-1 py-3 bg-red-600 hover:bg-red-700 disabled:opacity-60 text-white font-semibold rounded-xl transition-colors"
+              className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold rounded-xl transition-colors"
             >
               {saving ? 'Guardando...' : 'Guardar'}
             </button>

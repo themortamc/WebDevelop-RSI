@@ -81,7 +81,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           {error && (
-            <div className="text-sm text-red-600 bg-red-50 px-4 py-3 rounded-xl">{error}</div>
+            <div className="text-sm text-blue-600 bg-blue-50 px-4 py-3 rounded-xl">{error}</div>
           )}
 
           <ImageUpload value={imageUrl} onChange={setImageUrl} />
@@ -93,7 +93,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
+              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
               placeholder="Pastillas de freno delanteras"
             />
           </div>
@@ -104,7 +104,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
               rows={3}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all resize-none"
+              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all resize-none"
               placeholder="Detalle del producto, compatibilidad, etc."
             />
           </div>
@@ -119,7 +119,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
                 step="1"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
+                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
                 placeholder="15000"
               />
             </div>
@@ -131,7 +131,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
                 step="1"
                 value={stock}
                 onChange={(e) => setStock(e.target.value)}
-                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
+                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
               />
             </div>
           </div>
@@ -144,7 +144,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
                 required
                 value={sku}
                 onChange={(e) => setSku(e.target.value)}
-                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
+                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
                 placeholder="FRN-001"
               />
             </div>
@@ -155,7 +155,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
                 required
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
-                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
+                className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
                 placeholder="Bosch"
               />
             </div>
@@ -166,7 +166,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
             <select
               value={categoryId}
               onChange={(e) => setCategoryId(e.target.value)}
-              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
+              className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
             >
               <option value="">Sin categoría</option>
               {categories.map((c) => (
@@ -190,7 +190,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
               aria-checked={published}
               onClick={() => setPublished((v) => !v)}
               className={`relative w-11 h-6 rounded-full transition-colors flex-shrink-0 ${
-                published ? 'bg-red-600' : 'bg-slate-300'
+                published ? 'bg-blue-600' : 'bg-slate-300'
               }`}
             >
               <span
@@ -206,7 +206,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
               type="checkbox"
               checked={featured}
               onChange={(e) => setFeatured(e.target.checked)}
-              className="w-4 h-4 rounded border-slate-300 text-red-600 focus:ring-red-500/30"
+              className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500/30"
             />
             <span className="text-sm text-slate-700">Mostrar como producto destacado</span>
           </label>
@@ -222,7 +222,7 @@ export default function ProductForm({ product, categories, onClose, onSaved }: P
             <button
               type="submit"
               disabled={saving}
-              className="flex-1 py-3 bg-red-600 hover:bg-red-700 disabled:opacity-60 text-white font-semibold rounded-xl transition-colors"
+              className="flex-1 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold rounded-xl transition-colors"
             >
               {saving ? 'Guardando...' : 'Guardar'}
             </button>

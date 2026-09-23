@@ -35,7 +35,7 @@ export default function Contact() {
     {
       icon: Clock,
       title: 'Horario',
-      lines: ['Lun - Vie: 8:00 - 18:00', 'Sáb: 9:00 - 14:00'],
+      lines: ['Lun - Vie: 9:00 - 13:00 y 16:00 - 21:00', 'Sáb: 9:00 - 13:00'],
     },
   ];
 
@@ -43,7 +43,7 @@ export default function Contact() {
     <section id="contacto" className="py-16 lg:py-24 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
-          <span className="text-sm font-semibold text-red-600 uppercase tracking-wider">
+          <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
             Contacto
           </span>
           <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mt-2">
@@ -67,7 +67,7 @@ export default function Contact() {
                     : {})}
                   className="flex gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:border-slate-200 transition-colors"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-red-600 flex items-center justify-center flex-shrink-0">
+                  <div className="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0">
                     <info.icon className="w-5 h-5 text-white" />
                   </div>
                   <div>
@@ -109,7 +109,7 @@ export default function Contact() {
                         required
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
                         placeholder="Tu nombre"
                       />
                     </div>
@@ -122,7 +122,7 @@ export default function Contact() {
                         required
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all"
                         placeholder="+54 9 ..."
                       />
                     </div>
@@ -136,13 +136,13 @@ export default function Contact() {
                       rows={5}
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all resize-none"
+                      className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all resize-none"
                       placeholder="Cuéntanos qué repuesto estás buscando..."
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl shadow-lg shadow-red-600/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
+                    className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
                   >
                     <Send className="w-5 h-5" />
                     Enviar mensaje

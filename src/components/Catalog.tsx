@@ -16,8 +16,6 @@ type CatalogProps = {
 
 const sortOptions: { value: ProductFilters['sort']; label: string }[] = [
   { value: 'featured', label: 'Destacados' },
-  { value: 'price-asc', label: 'Precio: menor a mayor' },
-  { value: 'price-desc', label: 'Precio: mayor a menor' },
   { value: 'name', label: 'Nombre A-Z' },
 ];
 
@@ -47,7 +45,7 @@ export default function Catalog({
         {/* Section header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8">
           <div>
-            <span className="text-sm font-semibold text-red-600 uppercase tracking-wider">
+            <span className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
               Catálogo
             </span>
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mt-2">
@@ -74,7 +72,7 @@ export default function Catalog({
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as ProductFilters['sort'])}
-              className="px-4 py-2.5 border border-slate-300 rounded-xl text-sm font-medium text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all cursor-pointer"
+              className="px-4 py-2.5 border border-slate-300 rounded-xl text-sm font-medium text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all cursor-pointer"
             >
               {sortOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -114,7 +112,7 @@ export default function Catalog({
                   }}
                   className={`text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                     !selectedCategory
-                      ? 'bg-red-50 text-red-600'
+                      ? 'bg-blue-50 text-blue-600'
                       : 'text-slate-600 hover:bg-slate-100'
                   }`}
                 >
@@ -129,7 +127,7 @@ export default function Catalog({
                     }}
                     className={`text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                       selectedCategory === cat.id
-                        ? 'bg-red-50 text-red-600'
+                        ? 'bg-blue-50 text-blue-600'
                         : 'text-slate-600 hover:bg-slate-100'
                     }`}
                   >
@@ -144,7 +142,7 @@ export default function Catalog({
           <div className="flex-1">
             {error ? (
               <div className="flex flex-col items-center justify-center py-20 text-center">
-                <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+                <AlertCircle className="w-12 h-12 text-blue-500 mb-4" />
                 <h3 className="font-bold text-slate-900 mb-2">Error al cargar productos</h3>
                 <p className="text-sm text-slate-500">{error}</p>
               </div>

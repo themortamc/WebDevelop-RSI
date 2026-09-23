@@ -20,14 +20,14 @@ export default function Hero({ onShopNow, onViewCategories }: HeroProps) {
 
       <div className="relative max-w-7xl mx-auto px-4 py-20 lg:py-32">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-600/20 border border-red-500/30 mb-6 animate-[fadeIn_0.6s_ease-out]">
-            <ShieldCheck className="w-4 h-4 text-red-400" />
-            <span className="text-sm font-medium text-red-300">Más de 25 años de experiencia</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/20 border border-blue-500/30 mb-6 animate-[fadeIn_0.6s_ease-out]">
+            <ShieldCheck className="w-4 h-4 text-blue-400" />
+            <span className="text-sm font-medium text-blue-300">Más de 25 años de experiencia</span>
           </div>
 
           <h1 className="text-4xl lg:text-6xl font-bold text-white leading-[1.1] mb-6 animate-[fadeIn_0.7s_ease-out]">
             Repuestos originales para
-            <span className="block text-red-500">tu vehículo</span>
+            <span className="block text-blue-500">tu vehículo</span>
           </h1>
 
           <p className="text-lg text-slate-300 mb-8 max-w-xl leading-relaxed animate-[fadeIn_0.8s_ease-out]">
@@ -38,7 +38,7 @@ export default function Hero({ onShopNow, onViewCategories }: HeroProps) {
           <div className="flex flex-col sm:flex-row gap-3 mb-12 animate-[fadeIn_0.9s_ease-out]">
             <button
               onClick={onShopNow}
-              className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl shadow-lg shadow-red-600/30 hover:shadow-red-600/40 hover:scale-[1.02] transition-all"
+              className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-600/40 hover:scale-[1.02] transition-all"
             >
               Ver Catálogo
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -55,21 +55,21 @@ export default function Hero({ onShopNow, onViewCategories }: HeroProps) {
           <div className="grid grid-cols-3 gap-4 max-w-lg animate-[fadeIn_1s_ease-out]">
             <div className="text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-                <Wrench className="w-5 h-5 text-red-400" />
+                <Wrench className="w-5 h-5 text-blue-400" />
                 <span className="text-white font-bold text-lg">5,000+</span>
               </div>
               <p className="text-xs text-slate-400">Clientes satisfechos</p>
             </div>
             <div className="text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-                <ShieldCheck className="w-5 h-5 text-red-400" />
+                <ShieldCheck className="w-5 h-5 text-blue-400" />
                 <span className="text-white font-bold text-lg">100%</span>
               </div>
               <p className="text-xs text-slate-400">Garantía real</p>
             </div>
             <div className="text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-                <Clock className="w-5 h-5 text-red-400" />
+                <Clock className="w-5 h-5 text-blue-400" />
                 <span className="text-white font-bold text-lg">25+</span>
               </div>
               <p className="text-xs text-slate-400">Años de experiencia</p>

@@ -74,7 +74,7 @@ export default function Header({ cartCount, onCartClick, onNavigate, onSearch, s
               onClick={() => handleNav('inicio')}
               className="flex items-center gap-2.5 group"
             >
-              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center shadow-md shadow-red-600/20 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shadow-md shadow-blue-600/20 group-hover:scale-105 transition-transform">
                 <Wrench className="w-5 h-5 lg:w-6 lg:h-6 text-white" strokeWidth={2.5} />
               </div>
               <div className="text-left">
@@ -93,7 +93,7 @@ export default function Header({ cartCount, onCartClick, onNavigate, onSearch, s
                 <button
                   key={item.section}
                   onClick={() => handleNav(item.section)}
-                  className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
                 >
                   {item.label}
                 </button>
@@ -117,7 +117,7 @@ export default function Header({ cartCount, onCartClick, onNavigate, onSearch, s
               >
                 <ShoppingCart className="w-5 h-5" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-[pop_0.2s_ease-out]">
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-blue-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-[pop_0.2s_ease-out]">
                     {cartCount}
                   </span>
                 )}
@@ -144,7 +144,7 @@ export default function Header({ cartCount, onCartClick, onNavigate, onSearch, s
                   onChange={(e) => onSearch(e.target.value)}
                   placeholder="Buscar repuestos por nombre, marca o SKU..."
                   autoFocus
-                  className="w-full pl-12 pr-4 py-3 bg-slate-100 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:bg-white transition-all"
+                  className="w-full pl-12 pr-4 py-3 bg-slate-100 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:bg-white transition-all"
                 />
               </div>
             </div>
@@ -159,7 +159,7 @@ export default function Header({ cartCount, onCartClick, onNavigate, onSearch, s
                 <button
                   key={item.section}
                   onClick={() => handleNav(item.section)}
-                  className="px-4 py-3 text-left text-sm font-medium text-slate-700 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                  className="px-4 py-3 text-left text-sm font-medium text-slate-700 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
                 >
                   {item.label}
                 </button>

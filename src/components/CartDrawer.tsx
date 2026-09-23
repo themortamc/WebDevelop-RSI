@@ -1,12 +1,10 @@
 import { X, Plus, Minus, ShoppingBag, Trash2, MessageCircle } from 'lucide-react';
 import type { CartItem } from '@/lib/hooks';
-import { formatPrice } from '@/lib/hooks';
 
 type CartDrawerProps = {
   isOpen: boolean;
   onClose: () => void;
   items: CartItem[];
-  total: number;
   onUpdateQuantity: (productId: string, quantity: number) => void;
   onRemove: (productId: string) => void;
   onClear: () => void;
@@ -17,7 +15,6 @@ export default function CartDrawer({
   isOpen,
   onClose,
   items,
-  total,
   onUpdateQuantity,
   onRemove,
   onClear,
@@ -42,10 +39,10 @@ export default function CartDrawer({
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5 text-red-600" />
+            <ShoppingBag className="w-5 h-5 text-blue-600" />
             <h2 className="font-bold text-lg text-slate-900">Tu carrito</h2>
             {items.length > 0 && (
-              <span className="px-2 py-0.5 bg-red-100 text-red-600 text-xs font-bold rounded-full">
+              <span className="px-2 py-0.5 bg-blue-100 text-blue-600 text-xs font-bold rounded-full">
                 {items.length}
               </span>
             )}
@@ -71,7 +68,7 @@ export default function CartDrawer({
               </p>
               <button
                 onClick={onClose}
-                className="px-6 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-red-600 transition-colors"
+                className="px-6 py-2.5 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-blue-600 transition-colors"
               >
                 Explorar productos
               </button>
@@ -102,7 +99,7 @@ export default function CartDrawer({
                       </h4>
                       <button
                         onClick={() => onRemove(item.product.id)}
-                        className="text-slate-400 hover:text-red-600 transition-colors flex-shrink-0"
+                        className="text-slate-400 hover:text-blue-600 transition-colors flex-shrink-0"
                         aria-label="Eliminar"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -115,7 +112,7 @@ export default function CartDrawer({
                       <div className="flex items-center gap-1 border border-slate-200 rounded-lg">
                         <button
                           onClick={() => onUpdateQuantity(item.product.id, item.quantity - 1)}
-                          className="w-7 h-7 flex items-center justify-center text-slate-600 hover:text-red-600 transition-colors"
+                          className="w-7 h-7 flex items-center justify-center text-slate-600 hover:text-blue-600 transition-colors"
                         >
                           <Minus className="w-3.5 h-3.5" />
                         </button>
@@ -124,20 +121,10 @@ export default function CartDrawer({
                         </span>
                         <button
                           onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)}
-                          className="w-7 h-7 flex items-center justify-center text-slate-600 hover:text-red-600 transition-colors"
+                          className="w-7 h-7 flex items-center justify-center text-slate-600 hover:text-blue-600 transition-colors"
                         >
                           <Plus className="w-3.5 h-3.5" />
                         </button>
-                      </div>
-
-                      {/* Price */}
-                      <div className="text-right">
-                        <div className="font-bold text-sm text-slate-900">
-                          {formatPrice(item.product.price * item.quantity)}
-                        </div>
-                        <div className="text-[10px] text-slate-400">
-                          {formatPrice(item.product.price)} c/u
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -146,7 +133,7 @@ export default function CartDrawer({
 
               <button
                 onClick={onClear}
-                className="w-full py-2.5 text-sm text-slate-500 hover:text-red-600 font-medium transition-colors"
+                className="w-full py-2.5 text-sm text-slate-500 hover:text-blue-600 font-medium transition-colors"
               >
                 Vaciar carrito
               </button>
@@ -157,18 +144,12 @@ export default function CartDrawer({
         {/* Footer */}
         {items.length > 0 && (
           <div className="border-t border-slate-100 p-5 space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-slate-600 font-medium">Total</span>
-              <span className="text-2xl font-bold text-slate-900">
-                {formatPrice(total)}
-              </span>
-            </div>
             <p className="text-xs text-slate-400">
-              Te vamos a redirigir a WhatsApp para coordinar el pedido
+              Te vamos a redirigir a WhatsApp para coordinar el pedido y coordinar el precio
             </p>
             <button
               onClick={onCheckout}
-              className="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl shadow-lg shadow-red-600/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/20 hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
             >
               <MessageCircle className="w-5 h-5" />
               Pedir por WhatsApp

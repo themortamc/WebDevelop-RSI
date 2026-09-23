@@ -1,6 +1,5 @@
 import { Star, ShoppingCart } from 'lucide-react';
 import type { Product } from '@/lib/supabase';
-import { formatPrice } from '@/lib/hooks';
 import ProductImageFallback from './ProductImageFallback';
 
 type ProductCardProps = {
@@ -34,7 +33,7 @@ export default function ProductCard({ product, onAddToCart, onQuickView }: Produ
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
           {product.featured && (
-            <span className="px-2.5 py-1 bg-red-600 text-white text-[10px] font-bold rounded-md uppercase tracking-wide shadow-sm">
+            <span className="px-2.5 py-1 bg-blue-600 text-white text-[10px] font-bold rounded-md uppercase tracking-wide shadow-sm">
               Destacado
             </span>
           )}
@@ -62,7 +61,7 @@ export default function ProductCard({ product, onAddToCart, onQuickView }: Produ
       {/* Content */}
       <div className="p-4 flex flex-col flex-1">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-semibold text-red-600 uppercase tracking-wide">
+          <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">
             {product.brand}
           </span>
           <div className="flex items-center gap-1">
@@ -72,7 +71,7 @@ export default function ProductCard({ product, onAddToCart, onQuickView }: Produ
         </div>
 
         <h3
-          className="font-bold text-slate-900 text-sm leading-snug mb-2 cursor-pointer hover:text-red-600 transition-colors line-clamp-2"
+          className="font-bold text-slate-900 text-sm leading-snug mb-2 cursor-pointer hover:text-blue-600 transition-colors line-clamp-2"
           onClick={() => onQuickView?.(product)}
         >
           {product.name}
@@ -84,13 +83,12 @@ export default function ProductCard({ product, onAddToCart, onQuickView }: Produ
 
         <div className="flex items-center justify-between gap-2 mt-auto">
           <div>
-            <div className="text-lg font-bold text-slate-900">{formatPrice(product.price)}</div>
             <div className="text-[10px] text-slate-400 font-mono">SKU: {product.sku}</div>
           </div>
           <button
             onClick={() => onAddToCart(product)}
             disabled={!inStock}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-900 text-white hover:bg-red-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all hover:scale-105 active:scale-95"
+            className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-900 text-white hover:bg-blue-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all hover:scale-105 active:scale-95"
             aria-label="Agregar al carrito"
           >
             <ShoppingCart className="w-4.5 h-4.5" />
