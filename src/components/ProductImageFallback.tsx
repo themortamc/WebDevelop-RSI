@@ -19,6 +19,24 @@ export default function ProductImageFallback({ product, iconClassName }: Product
   const iconName = product.category?.icon_name;
   const Icon = (iconName && (Icons[iconName as keyof typeof Icons] as Icons.LucideIcon)) || Package;
 
+  if (product.category?.image_url) {
+    return (
+      <div className="relative w-full h-full">
+        <img
+          src={product.category.image_url}
+          alt={product.category.name}
+          loading="lazy"
+          className="w-full h-full object-cover"
+        />
+        {product.category?.name && (
+          <span className="absolute bottom-2 left-2 px-2 py-0.5 bg-slate-900/70 text-white text-[10px] font-semibold uppercase tracking-wide rounded">
+            {product.category.name}
+          </span>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-slate-100 to-slate-200 text-slate-400">
       <Icon className={iconClassName ?? 'w-12 h-12'} strokeWidth={1.5} />
