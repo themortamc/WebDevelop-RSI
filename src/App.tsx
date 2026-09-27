@@ -49,7 +49,7 @@ export default function App() {
       ...lines,
     ].join('\n');
 
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
 
     cart.setIsOpen(false);
     setToast('Te llevamos a WhatsApp para confirmar tu pedido.');

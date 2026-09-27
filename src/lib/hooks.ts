@@ -1,3 +1,4 @@
+import { productSearchFilter } from '@/lib/security';
 import { useEffect, useState, useCallback } from 'react';
 import { supabase, type Product, type Category } from '@/lib/supabase';
 
@@ -55,7 +56,7 @@ export function useProducts(filters: ProductFilters = {}) {
         query = query.eq('category_id', categoryId);
       }
       if (search && search.trim()) {
-        query = query.or(`name.ilike.%${search.trim()}%,description.ilike.%${search.trim()}%,brand.ilike.%${search.trim()}%,sku.ilike.%${search.trim()}%`);
+        query = query.or(productSearchFilter(search, true));
       }
       if (featuredOnly) {
         query = query.eq('featured', true);

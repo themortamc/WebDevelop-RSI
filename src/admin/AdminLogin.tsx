@@ -13,10 +13,13 @@ export default function AdminLogin() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const message = await signIn(username, password);
-    setLoading(false);
-    if (message) {
-      setError('Usuario o contraseña incorrectos.');
+    try {
+      const message = await signIn(username, password);
+      if (message) setError('Usuario o contraseña incorrectos.');
+    } catch {
+      setError('No se pudo conectar. Intentá nuevamente.');
+    } finally {
+      setLoading(false);
     }
   };
 
