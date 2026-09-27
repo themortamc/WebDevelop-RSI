@@ -7,7 +7,7 @@ import ProductsAdmin from '@/admin/ProductsAdmin';
 import CategoriesAdmin from '@/admin/CategoriesAdmin';
 
 export default function AdminApp() {
-  const { isAuthenticated, loading, signOut } = useAuth();
+  const { isAuthenticated, isAdmin, loading, signOut } = useAuth();
   const [tab, setTab] = useState<'products' | 'categories'>('products');
   const [categories, setCategories] = useState<Category[]>([]);
 
@@ -17,8 +17,8 @@ export default function AdminApp() {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) loadCategories();
-  }, [isAuthenticated, loadCategories]);
+    if (isAdmin) loadCategories();
+  }, [isAdmin, loadCategories]);
 
   if (loading) {
     return <div className="min-h-screen bg-slate-100" />;
@@ -26,6 +26,20 @@ export default function AdminApp() {
 
   if (!isAuthenticated) {
     return <AdminLogin />;
+  }
+
+  if (!isAdmin) {
+    return (
+      <main className="min-h-screen bg-slate-100 flex items-center justify-center p-6">
+        <div className="bg-white rounded-xl p-6 max-w-md space-y-4">
+          <h1 className="font-bold text-xl">Acceso administrativo no disponible</h1>
+          <p>No se pudieron verificar tus permisos. Tu cuenta y sesión se conservan. Contactá al responsable del sitio o intentá nuevamente.</p>
+          <a href="/" className="block text-blue-600">Volver a la tienda</a>
+          <button onClick={() => window.location.reload()} className="block text-blue-600">Reintentar</button>
+          <button onClick={signOut} className="block text-slate-600">Cerrar sesión</button>
+        </div>
+      </main>
+    );
   }
 
   return (

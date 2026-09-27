@@ -1,3 +1,4 @@
+import { IMAGE_TYPES, imageUploadError } from '@/lib/security';
 import { useState, useRef } from 'react';
 import { Upload, X, Loader2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
@@ -15,32 +16,27 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
   const handleFile = async (file: File) => {
     setError(null);
 
-    if (!file.type.startsWith('image/')) {
-      setError('El archivo tiene que ser una imagen.');
-      return;
-    }
-    if (file.size > 5 * 1024 * 1024) {
-      setError('La imagen no puede pesar más de 5MB.');
+    const validationError = imageUploadError(file);
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
     setUploading(true);
-    const ext = file.name.split('.').pop();
-    const path = `${crypto.randomUUID()}.${ext}`;
-
-    const { error: uploadError } = await supabase.storage
-      .from('product-images')
-      .upload(path, file, { upsert: false });
-
-    if (uploadError) {
-      setError('No se pudo subir la imagen: ' + uploadError.message);
+    try {
+      // Never trust the filename extension; SVG/HTML are not upload formats.
+      const path = `${crypto.randomUUID()}.${IMAGE_TYPES[file.type]}`;
+      const { error: uploadError } = await supabase.storage
+        .from('product-images')
+        .upload(path, file, { upsert: false, contentType: file.type });
+      if (uploadError) throw uploadError;
+      const { data } = supabase.storage.from('product-images').getPublicUrl(path);
+      onChange(data.publicUrl);
+    } catch {
+      setError('No se pudo subir la imagen. Revisá tus permisos y la conexión.');
+    } finally {
       setUploading(false);
-      return;
     }
-
-    const { data } = supabase.storage.from('product-images').getPublicUrl(path);
-    onChange(data.publicUrl);
-    setUploading(false);
   };
 
   return (
@@ -82,7 +78,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept={Object.keys(IMAGE_TYPES).join(',')}
         className="hidden"
         onChange={(e) => {
           const file = e.target.files?.[0];

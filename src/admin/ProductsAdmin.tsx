@@ -1,3 +1,4 @@
+import { productSearchFilter } from '@/lib/security';
 import { useEffect, useCallback, useState } from 'react';
 import {
   Plus,
@@ -45,12 +46,11 @@ export default function ProductsAdmin({ categories }: ProductsAdminProps) {
   // las acciones en lote), para que "todo lo que coincide con la búsqueda"
   // sea siempre exactamente lo mismo que se ve en la lista de abajo.
   const applyFilters = useCallback(
-    <T extends { or: Function; eq: Function }>(query: T): T => {
-      let q: any = query;
+    <T extends { or: (filter: string) => T; eq: (column: string, value: string | boolean) => T }>(query: T): T => {
+      let q = query;
       const term = search.trim();
       if (term) {
-        const like = `%${term}%`;
-        q = q.or(`name.ilike.${like},brand.ilike.${like},sku.ilike.${like}`);
+        q = q.or(productSearchFilter(term));
       }
       if (categoryFilter) {
         q = q.eq('category_id', categoryFilter);
@@ -136,7 +136,7 @@ export default function ProductsAdmin({ categories }: ProductsAdminProps) {
     async (patch: Record<string, unknown>, confirmMsg: string) => {
       if (!confirm(confirmMsg)) return;
       setBulkLoading(true);
-      let query = supabase.from('products').update(patch) as any;
+      let query = supabase.from('products').update(patch);
       query = applyFilters(query);
       const { error } = await query;
       setBulkLoading(false);
